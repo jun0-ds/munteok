@@ -1,0 +1,9 @@
+[submodule "bedrock/sonmat"]
+	path = bedrock/sonmat
+	url = git@github.com:jun0-ds/sonmat.git
+[submodule "bedrock/bobusang"]
+	path = bedrock/bobusang
+	url = git@github.com:jun0-ds/bobusang.git
+[submodule "madang/vstabs"]
+	path = madang/vstabs
+	url = git@github.com:jun0-ds/vstabs.git

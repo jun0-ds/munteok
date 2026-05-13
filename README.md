@@ -24,18 +24,25 @@ AI 에이전트가 *거주*할 수 있는 substrate를 짓기 위한 framework. 
 - **3-layer 시스템 아키텍처**: kernel(인지 substrate, 예: [sonmat](https://github.com/jun0-ds/sonmat)) / data(`hearth/`+`desk/`) / management(`bedrock/deodeumi/`)
 - **5-layer pathfinding**: L1 hierarchy / L2 KG (TBD) / L3 pheromone (TBD) / L4 policy+identity (`hearth/`) / L5 agency loop
 
-## 관계된 OSS 도구
+## 관계된 OSS 도구 (시연 구성 — submodule mount)
 
-- [sonmat](https://github.com/jun0-ds/sonmat) — 인지 규율 플러그인 (substrate kernel 자리)
-- [bobusang](https://github.com/jun0-ds/bobusang) — 디바이스 싱크 인프라
+본 framework는 다음 컴포넌트를 *예시 구성*으로 submodule mount한다. fork 시 자유롭게 다른 컴포넌트로 교체 가능 — `.gitmodules` 갱신 + `git submodule deinit` / `git submodule add` 패턴.
 
-이 도구들은 안채(instance) 측에서 `bedrock/` 하위 symlink로 mount하는 게 권장 패턴.
+- [`bedrock/sonmat`](https://github.com/jun0-ds/sonmat) — 인지 규율 플러그인 (substrate kernel 자리)
+- [`bedrock/bobusang`](https://github.com/jun0-ds/bobusang) — 디바이스 싱크 인프라
+- [`madang/vstabs`](https://github.com/jun0-ds/vstabs) — VS Code 기반 UI 셸 (사람과 substrate의 만남 자리)
 
 ## 사용법
 
+```bash
+git clone --recurse-submodules https://github.com/jun0-ds/munteok.git
+# 또는 clone 후
+git submodule update --init --recursive
+```
+
 v0 부트스트랩 도구는 진행 중 — `setup.sh` 형태로 안채 scaffold 예정.
 
-현재는 reference 구조로만 — 자기 안채를 만들 때 본 리포의 zone 구조 + README를 base로 fork하거나 scaffold.
+현재는 reference 구조로만 — 자기 안채를 만들 때 본 리포를 base로 fork하거나 scaffold. fork 시 hearth/identity·desk 등 *안채 전용* zone 본문은 자기 instance 콘텐츠로 교체. 컴포넌트(bedrock/{sonmat,bobusang}·madang/vstabs)는 *시연*이라 그대로 두거나 자기 fork·다른 컴포넌트로 자유 교체.
 
 ## v0 scope
 
