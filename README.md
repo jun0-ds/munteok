@@ -30,6 +30,7 @@ AI 에이전트가 *거주*할 수 있는 substrate를 짓기 위한 framework. 
 
 - [`bedrock/sonmat`](https://github.com/jun0-ds/sonmat) — 인지 규율 플러그인 (substrate kernel 자리)
 - [`bedrock/bobusang`](https://github.com/jun0-ds/bobusang) — 디바이스 싱크 인프라
+- [`bedrock/deodeumi`](https://github.com/jun0-ds/deodeumi) — substrate retrieval + path orchestration 함수의 자리 (management 자리, 2026-05-14 추출)
 - [`madang/vstabs`](https://github.com/jun0-ds/vstabs) — VS Code 기반 UI 셸 (사람과 substrate의 만남 자리)
 
 ## 사용법

@@ -4,9 +4,9 @@
 
 ## 기대 거주
 
-- `sonmat/` — universal cognitive substrate (OSS, 안채에선 symlink로 mount: [github.com/jun0-ds/sonmat](https://github.com/jun0-ds/sonmat))
-- `bobusang/` — 디바이스 싱크 인프라 (OSS, 안채에선 symlink로 mount: [github.com/jun0-ds/bobusang](https://github.com/jun0-ds/bobusang))
-- `deodeumi/` — 경로찾기/orchestration 함수의 자리. 상세: [`deodeumi/README.md`](deodeumi/README.md)
+- `sonmat/` — universal cognitive substrate ([github.com/jun0-ds/sonmat](https://github.com/jun0-ds/sonmat)). ADR-0007 submodule mount
+- `bobusang/` — 디바이스 싱크 인프라 ([github.com/jun0-ds/bobusang](https://github.com/jun0-ds/bobusang)). ADR-0007 submodule mount
+- `deodeumi/` — substrate retrieval + path orchestration 함수의 자리 ([github.com/jun0-ds/deodeumi](https://github.com/jun0-ds/deodeumi)). 2026-05-14 public 추출, ADR-0007 submodule mount
 - `patterns/` — 재사용 가능 패턴 (`@include-atomic`, `3-tier-ingest`, `pace-layering` 등)
 - `sonmat-memory/` — sonmat 범용 ops 메모리 (guard 검증된 `trap_*`·`insight_*`). sonmat 플러그인 SKILL.md의 default 경로와 호환되는 자리
 

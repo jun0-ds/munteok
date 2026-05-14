@@ -7,3 +7,7 @@
 [submodule "madang/vstabs"]
 	path = madang/vstabs
 	url = git@github.com:jun0-ds/vstabs.git
+[submodule "bedrock/deodeumi"]
+	path = bedrock/deodeumi
+	url = git@github.com:jun0-ds/deodeumi.git
+	branch = main
