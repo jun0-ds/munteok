@@ -4,20 +4,20 @@
 
 문턱(munteok) 이름의 출처인 *마당을 나온 암탉* framing의 그 **마당** — 안채(hearth)와 바깥세계 사이의 경계 공간. 안채는 정주의 자리, 마당은 *나와서 만나는* 자리.
 
-## 만남의 두 surface (2026-05-14 명시화)
+## 만남의 surface (5/19 정리)
 
-사람과 substrate의 만남은 *두 surface* 중 하나에서 일어남 — 둘 다 madang의 *논리 자리*:
+사람과 substrate의 만남이 일어나는 *논리 자리*. 2026-05-14에 박힌 *두 surface* framing 중 *에디터 바깥쪽 web 진입*은 5/19 사랑채(sarangchae)로 이동(ADR-0009). 마당 정체성은 그대로 유지.
 
 | surface | 위치 | 특징 |
 |---------|-----|------|
 | **에디터/IDE 안쪽** | AI 코딩 도구의 chat/extension UI (예: Claude Code VSCode extension) | 즉시 코드 적용·chat·diff·file tree. 호스트 도구의 세션 길이·UX 한계 상속. 외부 제품이라 zone 안 *물리 거주* X — 논리 자리만 |
-| **에디터/IDE 바깥쪽** | own-harness UI·외부 launcher·web surface | 자유 layout·세션 길이 자유. 본 zone에 *물리 거주* (시연: `madang/vstabs` submodule) |
+| ~~에디터/IDE 바깥쪽~~ | ~~own-harness UI·web surface~~ → **사랑채(sarangchae)로 이동** | AI-사람 소통·외부 진입·인증이 결의 핵심으로 드러나 사랑채 zone으로 분리 (5/19, ADR-0009) |
 
-두 surface는 *같은 substrate*에 접근하지만 운영 결이 다름. release notes에서 *어느 surface에 영향*인지 명시 가치 있음.
+마당의 결: *사람이 substrate를 쓰는* 자리. AI와 *소통·업무*하는 결은 사랑채.
 
 ## 기대 거주 (물리 mount)
 
-- 에디터/IDE 바깥 surface의 UI 컴포넌트 submodule (예: own-harness wrapper, 모니터·소통 UI, web entry 등). 시연: [`madang/vstabs`](https://github.com/jun0-ds/vstabs)
+현재 거주자 0. 미래 *사람-substrate 만남* 결의 새 도구가 거주 가능. 5/19 vstabs는 사랑채로 이동.
 
 ## 원칙
 

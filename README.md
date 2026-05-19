@@ -6,7 +6,7 @@ AI 에이전트가 *거주*할 수 있는 substrate를 짓기 위한 framework. 
 >
 > 안채(instance, private) ↔ 문턱(framework, public)의 분리가 v0의 기본 자세.
 
-## 4-zone (pace layering + 경계)
+## 5-zone (pace layering + 경계)
 
 | zone | 변화 속도 | 공유 | 정체 |
 |------|---------|------|-----|
@@ -14,10 +14,11 @@ AI 에이전트가 *거주*할 수 있는 substrate를 짓기 위한 framework. 
 | `hearth/` | 느림 | 비공개 | 정체성·자세·길든 판단 (안채 — 정주의 자리) |
 | `desk/` | 빠름 | 비공개 | 현재 작업·메모리·의제 |
 | `madang/` | 느림 | 비공개 | UI · 사람과 substrate의 만남 자리 (마당 — 나와서 만나는 자리) |
+| `sarangchae/` | 느림 | 비공개 | AI와 사람이 소통·업무하는 공간 (사랑채 — 외부 응대 자리, 인증 필수) |
 
-배경: Stewart Brand pace layering / Aristotle techne / Bourdieu habitus / dotfiles 표준 3-way → *마당을 나온 암탉* (황선미) framing 정합으로 4-zone 확장 (madang 추가).
+배경: Stewart Brand pace layering / Aristotle techne / Bourdieu habitus / dotfiles 표준 3-way → *마당을 나온 암탉* (황선미) framing 정합으로 4-zone 확장 (madang) → 한옥 *외부 응대* 결로 5-zone 진화 (sarangchae 추가, ADR-0009).
 
-문턱(munteok)이라는 이름이 약속한 *경계의 자리*가 internal zone에도 박힘 — 안채(hearth)가 안쪽 정체성, 마당(madang)이 바깥과의 만남.
+문턱(munteok)이라는 이름이 약속한 *경계의 자리*가 internal zone에도 박힘 — 안채(hearth)가 안쪽 정체성, 마당(madang)이 안쪽-바깥쪽 만남, 사랑채(sarangchae)가 *외부 진입 응대*.
 
 ## 직교 view
 
@@ -31,7 +32,7 @@ AI 에이전트가 *거주*할 수 있는 substrate를 짓기 위한 framework. 
 - [`bedrock/sonmat`](https://github.com/jun0-ds/sonmat) — 인지 규율 플러그인 (substrate kernel 자리)
 - [`bedrock/bobusang`](https://github.com/jun0-ds/bobusang) — 디바이스 싱크 인프라
 - [`bedrock/deodeumi`](https://github.com/jun0-ds/deodeumi) — substrate retrieval + path orchestration 함수의 자리 (management 자리, 2026-05-14 추출)
-- [`madang/vstabs`](https://github.com/jun0-ds/vstabs) — VS Code 기반 UI 셸 (사람과 substrate의 만남 자리)
+- [`sarangchae/`](https://github.com/jun0-ds/sarangchae) — AI-사람 소통·업무 web UI (외부 진입 + 인증). 2026-05-19 vstabs 리포 → sarangchae rename + web pivot 진행 중 (ADR-0009). 코드 pivot은 후속 ADR
 
 ## 사용법
 
