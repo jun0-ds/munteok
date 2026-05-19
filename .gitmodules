@@ -4,9 +4,9 @@
 [submodule "bedrock/bobusang"]
 	path = bedrock/bobusang
 	url = git@github.com:jun0-ds/bobusang.git
-[submodule "madang/vstabs"]
-	path = madang/vstabs
-	url = git@github.com:jun0-ds/vstabs.git
+[submodule "madang/sarangchae"]
+	path = madang/sarangchae
+	url = git@github.com:jun0-ds/sarangchae.git
 [submodule "bedrock/deodeumi"]
 	path = bedrock/deodeumi
 	url = git@github.com:jun0-ds/deodeumi.git
