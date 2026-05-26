@@ -10,7 +10,8 @@ All notable changes to the **munteok framework** itself (zone definitions, scaff
 
 ## [Unreleased]
 
-_(다음 변경 누적)_
+### Changed (2026-05-26)
+- `madang/sarangchae` submodule pointer: `f6df178` (v0.1.0) → `a522c24` — sarangchae 내부 `vstabs` → `sarangchae` 전면 rename(live 식별자·소스·docs) + README ADR-0009 reframe 반영. 역사 기록은 vstabs 스냅샷 보존
 
 ## [0.1.0] - 2026-05-26
 
