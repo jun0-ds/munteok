@@ -2,13 +2,19 @@
 
 All notable changes to the **munteok framework** itself (zone definitions, scaffold structure, component selection) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
-**Versioning policy**: SemVer tag is held back until external fork·breaking change·sustained API surface triggers it. Until then, changes accumulate under *Unreleased* — read `git log` for SHA-level granularity, this file for human-readable summary.
+**Versioning policy**: SemVer 태그는 *기록·마일스톤* 목적으로 단다 — 외부 사용자/트리거를 기다리지 않는다 (2026-05-26 stance 정정: sonmat도 사용자가 아닌 메커니즘·기록으로 태깅을 시작했다). 0.x는 API 안정 전 baseline 스냅샷. SHA 단위는 `git log`, 사람이 읽는 요약은 이 파일.
 
-**Scope**: framework-side changes only (zone READMEs, top-level README, scaffold, component selection, .gitignore). Component internals are tracked in their own CHANGELOG (e.g. `jun0-ds/sonmat`·`jun0-ds/bobusang`·`jun0-ds/deodeumi`·`jun0-ds/vstabs`).
+**Scope**: framework-side changes only (zone READMEs, top-level README, scaffold, component selection, .gitignore). Component internals are tracked in their own CHANGELOG (e.g. `jun0-ds/sonmat`·`jun0-ds/bobusang`·`jun0-ds/deodeumi`·`jun0-ds/sarangchae`).
 
 ---
 
 ## [Unreleased]
+
+_(다음 변경 누적)_
+
+## [0.1.0] - 2026-05-26
+
+첫 SemVer baseline — 기록·마일스톤 도장. **4-zone scaffold + 컴포넌트 4개 submodule mount + distribution(scaffold + marker block) 모델**이 표면. 같은 날 컴포넌트들도 각자 v0.1.0 baseline (sonmat은 v0.14.0).
 
 ### Added (2026-05-14)
 - `bedrock/deodeumi` component mounted (4th component, public extraction) — substrate retrieval + path orchestration 함수의 자리 ([`jun0-ds/deodeumi`](https://github.com/jun0-ds/deodeumi))
@@ -19,11 +25,11 @@ All notable changes to the **munteok framework** itself (zone definitions, scaff
 ### Changed (2026-05-14)
 - `bedrock/deodeumi` submodule pointer: `8b11f8b` (initial) → `6cfccf9` (skills/requery/SKILL.md 반영)
 
-### Component pointers (current)
-- `bedrock/sonmat` → `231a0e1d` (v0.13.1)
-- `bedrock/bobusang` → `41207096`
-- `bedrock/deodeumi` → `6cfccf9` 🆕
-- `madang/vstabs` → `2299ce92`
+### Component pointers (v0.1.0 기준, 2026-05-26)
+- `bedrock/sonmat` → `161955d` (v0.14.0)
+- `bedrock/bobusang` → `dd97714` (v0.1.0)
+- `bedrock/deodeumi` → `c723e76` (v0.1.0)
+- `madang/sarangchae` → `f6df178` (v0.1.0)  _(이전 stale 표기: `madang/vstabs` → `231a0e1d`/`41207096`/`6cfccf9`/`2299ce92` — 5/19 rename + 컴포넌트 v0.1.0 cut 반영)_
 
 ---
 
