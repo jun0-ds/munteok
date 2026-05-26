@@ -10,6 +10,9 @@ All notable changes to the **munteok framework** itself (zone definitions, scaff
 
 ## [Unreleased]
 
+### Added (2026-05-26)
+- **`setup.sh` 신설** — 안채 scaffold 도구 (v0 부트스트랩, agenda v0.x 트랙). fork 후 실행 → ① private zone placeholder(`hearth/identity/{voice,position,relations}`·`desk/agenda/current`·`desk/diary`) 스캐폴드 ② 4-zone 정의를 `~/.claude/CLAUDE.md`에 `munteok:zones` marker block으로 install (bobusang `install_or_update_marker_block` 패턴 차용). **idempotent**. 메모리/싱크(→bobusang)·thinking(→sonmat)·device 표·desk↔~/.claude symlink는 명시적 위임(경계 겹침 회피). `templates/` 6종 동반. sandbox 3종 검증(fresh / idempotent skip+marker갱신 / marker-update + 바깥 콘텐츠 보존). `MUNTEOK_CLAUDE_DIR` env override(테스트용)
+
 ### Changed (2026-05-26)
 - `madang/sarangchae` submodule pointer: `f6df178` (v0.1.0) → `a522c24` — sarangchae 내부 `vstabs` → `sarangchae` 전면 rename(live 식별자·소스·docs) + README ADR-0009 reframe 반영. 역사 기록은 vstabs 스냅샷 보존
 

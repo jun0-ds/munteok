@@ -41,9 +41,20 @@ git clone --recurse-submodules https://github.com/jun0-ds/munteok.git
 git submodule update --init --recursive
 ```
 
-v0 부트스트랩 도구는 진행 중 — `setup.sh` 형태로 안채 scaffold 예정.
+### 안채 scaffold — `setup.sh`
 
-현재는 reference 구조로만 — 자기 안채를 만들 때 본 리포를 base로 fork하거나 scaffold. fork 시 hearth/identity·desk 등 *안채 전용* zone 본문은 자기 instance 콘텐츠로 교체. 컴포넌트(bedrock/{sonmat,bobusang}·madang/vstabs)는 *시연*이라 그대로 두거나 자기 fork·다른 컴포넌트로 자유 교체.
+fork 후 한 번 실행하면 안채 private zone placeholder(hearth/identity·desk/agenda·diary)를 스캐폴드하고, 4-zone 정의를 `~/.claude/CLAUDE.md`에 marker block(`munteok:zones`)으로 install한다. **idempotent** — 재실행 안전(기존 파일 skip, marker 갱신).
+
+```bash
+bash setup.sh
+```
+
+setup.sh는 *framework 자리*만 깐다. 나머지는 컴포넌트에 위임:
+
+- 메모리·노트·디바이스 싱크 → [bobusang](https://github.com/jun0-ds/bobusang) `setup.sh`
+- thinking 규율 → [sonmat](https://github.com/jun0-ds/sonmat) 설치
+
+fork 시 hearth/identity·desk 등 *안채 전용* zone 본문은 자기 instance 콘텐츠로 채운다. 컴포넌트(bedrock/{sonmat,bobusang,deodeumi}·madang/sarangchae)는 *시연*이라 그대로 두거나 자기 fork·다른 컴포넌트로 자유 교체.
 
 ## v0 scope
 
@@ -54,7 +65,7 @@ v0 부트스트랩 도구는 진행 중 — `setup.sh` 형태로 안채 scaffold
 
 ## v0.x 이후 (deferred)
 
-deodeumi management 에이전트, L2 KG index, L3 pheromone log, L5 agency loop reconciler, scaffold 도구.
+deodeumi management 에이전트, L2 KG index, L3 pheromone log, L5 agency loop reconciler.
 
 ## License
 
