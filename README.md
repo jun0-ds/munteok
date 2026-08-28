@@ -31,7 +31,7 @@ AI 에이전트가 *거주*할 수 있는 substrate를 짓기 위한 framework. 
 - [`bedrock/sonmat`](https://github.com/jun0-ds/sonmat) — 인지 규율 플러그인 (substrate kernel 자리)
 - [`bedrock/bobusang`](https://github.com/jun0-ds/bobusang) — 디바이스 싱크 인프라
 - [`bedrock/deodeumi`](https://github.com/jun0-ds/deodeumi) — substrate retrieval + path orchestration 함수의 자리 (management 자리, 2026-05-14 추출)
-- [`madang/sarangchae`](https://github.com/jun0-ds/sarangchae) — AI-사람 소통·업무 web UI (외부 진입 + 인증). 2026-05-19 vstabs 리포 → sarangchae rename + 마당 안 mount 이름 변경(`madang/vstabs` → `madang/sarangchae`). 코드 web pivot은 별도 ADR (ADR-0009)
+- [`madang/sarangchae`](https://github.com/jun0-ds/sarangchae) — AI-사람 소통·업무 web UI의 역사적 예시. 2026-05-19 vstabs에서 rename됐고, maintainer instance는 2026-08-29 Paseo 채택 뒤 개발을 중단했다. 리포와 결정 기록은 보존한다
 
 ## 사용법
 

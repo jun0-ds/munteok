@@ -10,6 +10,10 @@ All notable changes to the **munteok framework** itself (zone definitions, scaff
 
 ## [Unreleased]
 
+### Changed (2026-08-29)
+- `bedrock/sonmat` submodule pointer: `54cc889` (v0.17.0) → `212f32c` (v0.17.1). 자동 내부 검증인 guard를 사용자 호출 표면에서 제거한 메타데이터 정렬.
+- `madang/sarangchae` submodule pointer: `0e67e25` → `99a79f4`. maintainer instance가 Paseo를 활성 remote-agent 표면으로 채택하면서 사랑채 개발을 중단했다. framework는 사랑채를 역사적 UI 컴포넌트 예시로 보존한다.
+
 ### Added (2026-05-26)
 - **`setup.sh` 신설** — 안채 scaffold 도구 (v0 부트스트랩, agenda v0.x 트랙). fork 후 실행 → ① private zone placeholder(`hearth/identity/{voice,position,relations}`·`desk/agenda/current`·`desk/diary`) 스캐폴드 ② 4-zone 정의를 `~/.claude/CLAUDE.md`에 `munteok:zones` marker block으로 install (bobusang `install_or_update_marker_block` 패턴 차용). **idempotent**. 메모리/싱크(→bobusang)·thinking(→sonmat)·device 표·desk↔~/.claude symlink는 명시적 위임(경계 겹침 회피). `templates/` 6종 동반. sandbox 3종 검증(fresh / idempotent skip+marker갱신 / marker-update + 바깥 콘텐츠 보존). `MUNTEOK_CLAUDE_DIR` env override(테스트용)
 

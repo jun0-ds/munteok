@@ -11,13 +11,13 @@
 | surface | 위치 | 특징 |
 |---------|-----|------|
 | **에디터/IDE 안쪽** | AI 코딩 도구의 chat/extension UI (예: Claude Code VSCode extension) | 즉시 코드 적용·chat·diff·file tree. 호스트 도구의 세션 길이·UX 한계 상속. 외부 제품이라 zone 안 *물리 거주* X — 논리 자리만 |
-| **에디터/IDE 바깥쪽** | own-harness UI·외부 launcher·web surface | 자유 layout·세션 길이 자유. 본 zone에 *물리 거주* (시연: `madang/sarangchae` submodule, 이전 `madang/vstabs` — 2026-05-19 rename + AI-사람 소통·외부 진입·인증 결로 framing 진화) |
+| **에디터/IDE 바깥쪽** | own-harness UI·외부 launcher·web surface | 자유 layout·세션 길이 자유. 역사적 시연인 `madang/sarangchae` submodule은 2026-08-29 개발 중단됐고 코드·결정 기록으로 보존된다 |
 
 두 surface는 *같은 substrate*에 접근하지만 운영 결이 다름. release notes에서 *어느 surface에 영향*인지 명시 가치 있음.
 
 ## 기대 거주 (물리 mount)
 
-- 에디터/IDE 바깥 surface의 UI 컴포넌트 submodule. 시연: [`madang/sarangchae`](https://github.com/jun0-ds/sarangchae)
+- 에디터/IDE 바깥 surface의 UI 컴포넌트. 역사적 시연: [`madang/sarangchae`](https://github.com/jun0-ds/sarangchae). 활성 도구 선택은 각 instance가 정한다
 
 ## 원칙
 
