@@ -10,6 +10,18 @@ All notable changes to the **munteok framework** itself (zone definitions, scaff
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-19
+
+### Added
+- Windows PowerShell 5.1 설치기와 소스/사용자 자료를 분리한 작업공간을 추가했다. 로컬 메모리·노트·ICM 라우팅은 보부상 없이 준비한다.
+- 업무·개인 프로젝트/이슈의 파일 정리·완료·보관과 기존 기록 경로 보존 템플릿을 추가했다.
+- 장치의 로컬 날짜 기준 하루 한 번 stable release를 확인하는 알림 도구와 격리 Windows 검증을 추가했다.
+
+### Changed
+- 기본 설치에서 재귀 clone·SSH·보부상·사랑채 의존을 제거했다. 기존 component 원천과 Bash 설치는 보존한다.
+- 기존 사용자 문서·계정·권한·harness 설정을 보존하며 관리 block과 runtime tool만 갱신한다.
+
+
 ### Changed (2026-08-29)
 - `bedrock/sonmat` submodule pointer: `54cc889` (v0.17.0) → `212f32c` (v0.17.1). 자동 내부 검증인 guard를 사용자 호출 표면에서 제거한 메타데이터 정렬.
 - `madang/sarangchae` submodule pointer: `0e67e25` → `99a79f4`. maintainer instance가 Paseo를 활성 remote-agent 표면으로 채택하면서 사랑채 개발을 중단했다. framework는 사랑채를 역사적 UI 컴포넌트 예시로 보존한다.

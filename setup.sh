@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Legacy instance-in-checkout path. New Windows-native installs use setup.ps1
+# and keep user data outside this public source checkout. See README.md.
+
 # munteok setup — scaffold a 문턱 substrate (안채) from a fork of this framework.
 #
 # What it does (framework-owned only):
