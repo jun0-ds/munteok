@@ -7,7 +7,3 @@
 [submodule "madang/sarangchae"]
 	path = madang/sarangchae
 	url = git@github.com:jun0-ds/sarangchae.git
-[submodule "bedrock/deodeumi"]
-	path = bedrock/deodeumi
-	url = git@github.com:jun0-ds/deodeumi.git
-	branch = main

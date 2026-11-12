@@ -88,7 +88,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$WorkspaceRoot/.munteok
 구분하는 배경 구조예요. 새 기본 설치에서는 사용자 정보와 작업 자료가 공개 소스 바깥의 작업공간에 있어요.
 
 - [손맛](https://github.com/jun0-ds/sonmat)은 사고·실행 규율이에요. 셋업 가이드의 손맛 단계에서 설치해 기본 로드해요.
-- [더듬이](https://github.com/jun0-ds/deodeumi)는 검색 방법론의 원천으로 연결해요. 추가 검색 도구는 필요할 때 선택하고 기본 문맥 라우팅은 Markdown만으로 동작해요.
+- 검색 방법론(requery)은 2026-11-12부터 손맛에 들어 있어요. 이전 원천인 [더듬이](https://github.com/jun0-ds/deodeumi) 저장소는 보관 상태예요. 추가 검색 도구는 필요할 때 선택하고 기본 문맥 라우팅은 Markdown만으로 동작해요.
 - 보부상은 선택 동기화 도구예요. 로컬 기억·노트 생성에는 필요하지 않아요.
 - 사랑채는 역사적 UI 구현으로 보존하며 새 기본 설치에서 받거나 실행하지 않아요.
 

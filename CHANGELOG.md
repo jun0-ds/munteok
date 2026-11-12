@@ -10,6 +10,11 @@ All notable changes to the **munteok framework** itself (zone definitions, scaff
 
 ## [Unreleased]
 
+### Changed (2026-11-12)
+- `bedrock/deodeumi` submodule 제거. 더듬이의 `requery` 스킬은 sonmat v0.24.0으로 옮겼고 `jun0-ds/deodeumi`는 보관(archive)했다. 근거: sonmat ADR `docs/decisions/2026-11-12-absorb-deodeumi-requery.md`.
+- `bedrock/sonmat` submodule pointer → v0.24.0 (requery 흡수, autoloop 위임 현황판).
+- README·`bedrock/README.md`의 더듬이 안내를 손맛 기준으로 갱신.
+
 ## [0.2.0] - 2026-10-19
 
 ### Added
