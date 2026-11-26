@@ -24,8 +24,29 @@ if ($WorkspaceRoot.Equals($SourcePath, [StringComparison]::OrdinalIgnoreCase) -o
 if ($WorkspaceRoot -eq [IO.Path]::GetPathRoot($WorkspaceRoot).TrimEnd([char[]]'\/')) {
     throw 'Choose a dedicated workspace folder, not a drive root.'
 }
-function Write-Utf8([string]$Path, [string]$Content) {
-    [IO.File]::WriteAllText($Path, $Content, (New-Object Text.UTF8Encoding($true)))
+function Write-Utf8([string]$Path, [string]$Content, [bool]$WithBom = $true) {
+    [IO.File]::WriteAllText($Path, $Content, (New-Object Text.UTF8Encoding($WithBom)))
+}
+function Update-ManagedBlock([string]$Path, [string]$Start, [string]$End, [string]$Section, [bool]$WithBom) {
+    $Block = $Start + "`r`n" + $Section.TrimEnd() + "`r`n" + $End
+    $Original = ''
+    if (Test-Path -LiteralPath $Path) { $Original = Get-Content -LiteralPath $Path -Encoding UTF8 -Raw }
+    if ($null -eq $Original) { $Original = '' }
+    $HasStart = $Original.Contains($Start)
+    $HasEnd = $Original.Contains($End)
+    if ($HasStart -or $HasEnd) {
+        $Pattern = '(?s)' + [regex]::Escape($Start) + '.*?' + [regex]::Escape($End)
+        $MatchesFound = [regex]::Matches($Original, $Pattern)
+        if ($MatchesFound.Count -ne 1 -or ([regex]::Matches($Original, [regex]::Escape($Start))).Count -ne 1 -or
+            ([regex]::Matches($Original, [regex]::Escape($End))).Count -ne 1) {
+            throw 'AGENTS.md contains incomplete or duplicate munteok markers. Preserve it and repair the markers before retrying.'
+        }
+        $Match = $MatchesFound[0]
+        $Updated = $Original.Substring(0, $Match.Index) + $Block + $Original.Substring($Match.Index + $Match.Length)
+    } else {
+        $Updated = $Original + "`r`n" + $Block + "`r`n"
+    }
+    Write-Utf8 $Path $Updated $WithBom
 }
 
 $Directories = @(
@@ -50,26 +71,24 @@ Get-ChildItem -LiteralPath $TemplateRoot -Recurse -File -Force | ForEach-Object 
 $AgentsPath = Join-Path $WorkspaceRoot 'AGENTS.md'
 $Start = '<!-- munteok:workspace:start -->'
 $End = '<!-- munteok:workspace:end -->'
-$Section = (Get-Content -LiteralPath (Join-Path $TemplateRoot 'AGENTS-section.md') -Encoding UTF8 -Raw).TrimEnd()
-$Block = $Start + "`r`n" + $Section + "`r`n" + $End
-$Original = ''
-if (Test-Path -LiteralPath $AgentsPath) { $Original = Get-Content -LiteralPath $AgentsPath -Encoding UTF8 -Raw }
-if ($null -eq $Original) { $Original = '' }
-$HasStart = $Original.Contains($Start)
-$HasEnd = $Original.Contains($End)
-if ($HasStart -or $HasEnd) {
-    $Pattern = '(?s)' + [regex]::Escape($Start) + '.*?' + [regex]::Escape($End)
-    $MatchesFound = [regex]::Matches($Original, $Pattern)
-    if ($MatchesFound.Count -ne 1 -or ([regex]::Matches($Original, [regex]::Escape($Start))).Count -ne 1 -or
-        ([regex]::Matches($Original, [regex]::Escape($End))).Count -ne 1) {
-        throw 'AGENTS.md contains incomplete or duplicate munteok markers. Preserve it and repair the markers before retrying.'
-    }
-    $Match = $MatchesFound[0]
-    $Updated = $Original.Substring(0, $Match.Index) + $Block + $Original.Substring($Match.Index + $Match.Length)
-} else {
-    $Updated = $Original + "`r`n" + $Block + "`r`n"
+$Section = (Get-Content -LiteralPath (Join-Path $TemplateRoot 'AGENTS-section.md') -Encoding UTF8 -Raw)
+Update-ManagedBlock $AgentsPath $Start $End $Section $true
+
+$CodexHome = $env:CODEX_HOME
+if ([string]::IsNullOrWhiteSpace($CodexHome)) {
+    $UserProfile = $env:USERPROFILE
+    if ([string]::IsNullOrWhiteSpace($UserProfile)) { $UserProfile = $HOME }
+    $CodexHome = Join-Path $UserProfile '.codex'
 }
-Write-Utf8 $AgentsPath $Updated
+if (Test-Path -LiteralPath $CodexHome -PathType Container) {
+    $CodexAgentsPath = Join-Path $CodexHome 'AGENTS.md'
+    $CodexStart = '<!-- munteok:codex:start -->'
+    $CodexEnd = '<!-- munteok:codex:end -->'
+    $CodexSection = (Get-Content -LiteralPath (Join-Path $SourceRoot 'templates/codex-AGENTS-section.md') -Encoding UTF8 -Raw).Replace('{{WORKSPACE_ROOT}}', $WorkspaceRoot)
+    Update-ManagedBlock $CodexAgentsPath $CodexStart $CodexEnd $CodexSection $false
+} else {
+    Write-Host 'Codex is not installed. If you install Codex later, run setup.ps1 again.'
+}
 
 $ClaudePath = Join-Path $WorkspaceRoot 'CLAUDE.md'
 if (-not (Test-Path -LiteralPath $ClaudePath)) {

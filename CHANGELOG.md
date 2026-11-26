@@ -10,6 +10,17 @@ All notable changes to the **munteok framework** itself (zone definitions, scaff
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-25
+
+### Added
+- `setup.ps1`이 Codex 전역 홈(`CODEX_HOME`, 없으면 `~/.codex`)의 `AGENTS.md`에 `munteok:codex` marker 블록을 넣는다. Codex는 git 저장소가 아닌 상위 폴더의 AGENTS.md를 자동으로 읽지 않으므로, 작업공간 안의 하위 폴더(그 안의 git 프로젝트 포함)에서도 루트 `AGENTS.md`를 읽도록 하는 포인터다. 블록 밖 사용자 내용은 보존하고 이 파일은 BOM 없이 쓴다.
+- `templates/codex-AGENTS-section.md` — Codex 블록 본문 템플릿. `{{WORKSPACE_ROOT}}`를 실제 경로로 치환한다.
+- Codex 홈이 없으면 파일을 만들지 않고 안내만 출력한다. 설치기 실패로 처리하지 않는다.
+
+### Changed
+- 작업공간 `AGENTS.md`와 Codex `AGENTS.md`의 marker block 갱신 로직을 `Update-ManagedBlock` 함수 하나로 합쳤다. 표식 검증·중복 차단·바깥 내용 보존 동작은 그대로다.
+- 작업공간은 하나만 가리킨다. 다른 작업공간으로 다시 실행하면 Codex 블록이 그 경로로 교체된다.
+
 ### Changed (2026-11-12)
 - `bedrock/deodeumi` submodule 제거. 더듬이의 `requery` 스킬은 sonmat v0.24.0으로 옮겼고 `jun0-ds/deodeumi`는 보관(archive)했다. 근거: sonmat ADR `docs/decisions/2026-11-12-absorb-deodeumi-requery.md`.
 - `bedrock/sonmat` submodule pointer → v0.24.0 (requery 흡수, autoloop 위임 현황판).

@@ -8,7 +8,10 @@ function Assert-True($Value, [string]$Message) {
 function Write-TestText([string]$Path, [string]$Value) {
     [IO.File]::WriteAllText($Path, $Value, (New-Object Text.UTF8Encoding($true)))
 }
+$OriginalCodexHome = $env:CODEX_HOME
 try {
+    # Keep the real user ~/.codex out of reach of every setup.ps1 call in this run.
+    $env:CODEX_HOME = Join-Path $TestRoot 'codex-absent-home'
     $Workspace = Join-Path $TestRoot '한글 작업 공간'
     & (Join-Path $SourceRoot 'setup.ps1') -WorkspaceRoot $Workspace
     Assert-True (Test-Path (Join-Path $Workspace 'AGENTS.md')) 'Root instruction was not created.'
@@ -18,7 +21,7 @@ try {
         Assert-True (Test-Path (Join-Path $Workspace $Directory)) "Missing directory: $Directory"
     }
     $Install = Get-Content (Join-Path $Workspace '.munteok/state/install.json') -Encoding UTF8 -Raw | ConvertFrom-Json
-    Assert-True ($Install.frameworkVersion -eq '0.2.0') 'Installed version does not match the source.'
+    Assert-True ($Install.frameworkVersion -eq '0.3.0') 'Installed version does not match the source.'
     Assert-True ((Get-Content (Join-Path $Workspace 'CLAUDE.md') -Raw -Encoding UTF8).Trim() -eq '@AGENTS.md') 'Claude adapter missing.'
     Assert-True (-not (Test-Path (Join-Path $Workspace 'bedrock/bobusang'))) 'Sync component should not be installed.'
     Write-Host 'PASS: empty workspace with Korean and space path, directories, version and adapter'
@@ -71,6 +74,42 @@ try {
     Assert-True ((Get-Content (Join-Path $BrokenRoot 'AGENTS.md') -Raw -Encoding UTF8) -eq '<!-- munteok:workspace:start --> private rules') 'Malformed AGENTS content was damaged.'
     Write-Host 'PASS: unsafe source/relative roots and malformed markers are rejected'
 
+    $CodexHome = Join-Path $TestRoot 'codex-home'
+    New-Item -ItemType Directory -Path $CodexHome -Force | Out-Null
+    $CodexAgentsPath = Join-Path $CodexHome 'AGENTS.md'
+    Write-TestText $CodexAgentsPath 'USER CODEX: preserve me'
+    $CodexWorkspace = Join-Path $TestRoot 'codex-workspace'
+    $env:CODEX_HOME = $CodexHome
+    & (Join-Path $SourceRoot 'setup.ps1') -WorkspaceRoot $CodexWorkspace
+    $CodexText = Get-Content $CodexAgentsPath -Raw -Encoding UTF8
+    Assert-True (([regex]::Matches($CodexText, [regex]::Escape('<!-- munteok:codex:start -->'))).Count -eq 1) 'Codex block was not added exactly once.'
+    Assert-True ($CodexText.IndexOf($CodexWorkspace, [StringComparison]::OrdinalIgnoreCase) -ge 0) 'Codex block does not point at the workspace.'
+    Assert-True $CodexText.Contains('USER CODEX: preserve me') 'User Codex content was not preserved.'
+    $CodexBytes = [IO.File]::ReadAllBytes($CodexAgentsPath)
+    Assert-True (-not ($CodexBytes.Length -ge 3 -and $CodexBytes[0] -eq 0xEF -and $CodexBytes[1] -eq 0xBB -and $CodexBytes[2] -eq 0xBF)) 'Codex AGENTS.md was written with a BOM.'
+    & (Join-Path $SourceRoot 'setup.ps1') -WorkspaceRoot $CodexWorkspace
+    $CodexText = Get-Content $CodexAgentsPath -Raw -Encoding UTF8
+    Assert-True (([regex]::Matches($CodexText, [regex]::Escape('<!-- munteok:codex:start -->'))).Count -eq 1) 'Codex block duplicated on reinstall.'
+    Assert-True $CodexText.Contains('USER CODEX: preserve me') 'User Codex content was lost on reinstall.'
+    Write-Host 'PASS: codex block is written once, points at the workspace, preserves user content and has no BOM'
+
+    $env:CODEX_HOME = Join-Path $TestRoot 'codex-absent'
+    $AbsentWorkspace = Join-Path $TestRoot 'codex-absent-workspace'
+    & (Join-Path $SourceRoot 'setup.ps1') -WorkspaceRoot $AbsentWorkspace
+    Assert-True (-not (Test-Path -LiteralPath $env:CODEX_HOME)) 'Setup created a missing Codex home.'
+    Write-Host 'PASS: missing Codex home is skipped without error'
+
+    $BrokenCodexHome = Join-Path $TestRoot 'codex-broken'
+    New-Item -ItemType Directory -Path $BrokenCodexHome -Force | Out-Null
+    $BrokenCodexPath = Join-Path $BrokenCodexHome 'AGENTS.md'
+    Write-TestText $BrokenCodexPath '<!-- munteok:codex:start --> private rules'
+    $env:CODEX_HOME = $BrokenCodexHome
+    $Rejected = $false
+    try { & (Join-Path $SourceRoot 'setup.ps1') -WorkspaceRoot (Join-Path $TestRoot 'codex-broken-workspace') } catch { $Rejected = $true }
+    Assert-True $Rejected 'Malformed codex markers were silently replaced.'
+    Assert-True ((Get-Content $BrokenCodexPath -Raw -Encoding UTF8) -eq '<!-- munteok:codex:start --> private rules') 'Malformed codex content was damaged.'
+    Write-Host 'PASS: malformed codex markers are rejected without touching the file'
+
     . (Join-Path $Workspace '.munteok/tools/Check-Updates.ps1') -WorkspaceRoot $Workspace
     $script:Calls = 0
     $script:ReleaseTag = 'v0.10.0'
@@ -115,5 +154,6 @@ try {
     Write-Host 'All Windows workspace tests passed.'
 }
 finally {
+    $env:CODEX_HOME = $OriginalCodexHome
     if (Test-Path $TestRoot) { Remove-Item -LiteralPath $TestRoot -Recurse -Force }
 }
